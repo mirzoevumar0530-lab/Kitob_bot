@@ -13,11 +13,11 @@ subscription_keyboard = InlineKeyboardMarkup(
         [InlineKeyboardButton(text="Санҷиши обуна", callback_data="check_sub")]
     ]
 )
-
 sponsor_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
-        [InlineKeyboardButton(text="💖 Спонсор шудан", url="https://t.me/your_channel_or_link")]
+        [InlineKeyboardButton(text="💖 Спонсор шудан", url="https://t.me/umar_coder")]
     ]
+)
 )
 
 @dp.message(Command(commands=["start"]))
