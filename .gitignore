@@ -1,0 +1,4 @@
+config.py
+config.py.save
+__pycache__/
+*.save
