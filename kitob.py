@@ -7,19 +7,34 @@ from config import API_TOKEN, CHANNEL_USERNAME, CHANNEL_URL
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
 
+# Inline клавиатура барои обуна
 subscription_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
-        [InlineKeyboardButton(text="Обуна шудан ба канал", url=CHANNEL_URL)],
-        [InlineKeyboardButton(text="Санҷиши обуна", callback_data="check_sub")]
+        [
+            InlineKeyboardButton(
+                text="Обуна шудан ба канал", url=CHANNEL_URL
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text="Санҷиши обуна", callback_data="check_sub"
+            )
+        ]
     ]
-)
-sponsor_keyboard = InlineKeyboardMarkup(
-    inline_keyboard=[
-        [InlineKeyboardButton(text="💖 Спонсор шудан", url="https://t.me/umar_coder")]
-    ]
-)
 )
 
+# Inline клавиатура барои спонсор
+sponsor_keyboard = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(
+                text="💖 Спонсор шудан", url="https://t.me/umar_coder"
+            )
+        ]
+    ]
+)
+
+# /start
 @dp.message(Command(commands=["start"]))
 async def start(message: Message):
     await message.reply(
@@ -27,6 +42,7 @@ async def start(message: Message):
         reply_markup=subscription_keyboard
     )
 
+# Санҷиши обуна
 @dp.callback_query(lambda c: c.data == "check_sub")
 async def check_subscription(callback: CallbackQuery):
     user_id = callback.from_user.id
@@ -38,9 +54,15 @@ async def check_subscription(callback: CallbackQuery):
                 reply_markup=sponsor_keyboard
             )
         else:
-            await callback.answer(text="❌ Аввал ба канали мо обуна шавед!", show_alert=True)
+            await callback.answer(
+                text="❌ Аввал ба канали мо обуна шавед!",
+                show_alert=True
+            )
     except Exception:
-        await callback.answer(text="Хатогӣ шуд. Ботро админ таъин кунед!", show_alert=True)
+        await callback.answer(
+            text="Хатогӣ шуд. Ботро админ таъин кунед!",
+            show_alert=True
+        )
 
 async def main():
     await dp.start_polling(bot)
